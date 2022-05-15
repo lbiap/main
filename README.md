@@ -20,6 +20,7 @@ To obtain a list of and independently-observed data about lexical bundles used i
 Make sure you've installed the following Python packages before running the software:
 1. pandas 
 2. nltk
+3. tkinter
 
 
 # If using this software for research:
