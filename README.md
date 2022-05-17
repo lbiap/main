@@ -2,11 +2,9 @@
 LBiaP: THe Lexical Bundles Identification and Analysis Program
 
 # Purpose
-
 To obtain a list of and independently-observed data about lexical bundles used in a given corpus.
 
 # Usage
-
 1. Open up the command prompt on your operating system in a given folder.
 2. Type python lbiap-024.py
 3. Click "select corpus" and locate a utf-8 encoded folder full of text files chosen for analysis.
@@ -15,8 +13,6 @@ To obtain a list of and independently-observed data about lexical bundles used i
 6. Click "Generate LB Data"
 
 # Dependencies
-
-
 Make sure you've installed the following Python packages before running the software:
 1. pandas 
 2. nltk
@@ -24,9 +20,8 @@ Make sure you've installed the following Python packages before running the soft
 
 
 # If using this software for research:
-
 Please cite it as follows:
-Lake, W. & Cortes, V. (In press). LBiaP: A solution to the problem of attaining observation independence in lexical bundle studies. _The International Journal of Corpus Linguistics_. Advance online publication.
+Cortes, V. & Lake, W. (In press). LBiaP: A solution to the problem of attaining observation independence in lexical bundle studies. _The International Journal of Corpus Linguistics_. Advance online publication.
 
 # Special Thanks
 
