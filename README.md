@@ -1,5 +1,5 @@
 # main
-LBiaP: THe Lexical Bundles Identification and Analysis Program
+LBiaP: THe Lexical Bundle Identification and Analysis Program
 
 # Purpose
 To obtain a list of and independently-observed data about lexical bundles used in a given corpus.
@@ -21,7 +21,7 @@ Make sure you've installed the following Python packages before running the soft
 
 # If using this software for research:
 Please cite it as follows:
-Cortes, V. & Lake, W. (In press). LBiaP: A solution to the problem of attaining observation independence in lexical bundle studies. _International Journal of Corpus Linguistics_. Advance online publication.
+Cortes, V. & Lake, W. (2023). LBiaP: A solution to the problem of attaining observation independence in lexical bundle studies. _International Journal of Corpus Linguistics_. Advance online publication.
 
 # Special Thanks
 
