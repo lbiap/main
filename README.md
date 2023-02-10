@@ -4,6 +4,10 @@ LBiaP: THe Lexical Bundle Identification and Analysis Program
 # Purpose
 To obtain a list of and independently-observed data about lexical bundles used in a given corpus.
 
+# Download the Windows Version Here
+
+Click here to download an executable Windows Version. 
+
 # Usage
 1. Open up the command prompt on your operating system in a given folder.
 2. Type python lbiap-024.py
