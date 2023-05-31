@@ -108,9 +108,8 @@ global df_results_cleaned
 
 def functionreport():
 
-	df_results_range_check = df_results_range_check.T
 	final_lb_list = list(df_results_range_check.columns.values)
-	print(final_lb_list)
+	
 	final_lb_list_df = pd.DataFrame(data = final_lb_list, columns =["Bundle"])
 	final_lb_list_df = final_lb_list_df.set_index("Bundle")
 
@@ -121,8 +120,8 @@ def functionreport():
 	functional_filename = filename_input + "_functionaltaxonomy_results.csv"
 	frame4.to_csv(functional_filename, index='File')
 
-def tokenizecorpus(corp):
-	for filePath in glob.glob(corp):
+def tokenizecorpus():
+	for filePath in glob.glob( newcorpusfiles ):
 		reader = ""
 		fileInfo_d = getFileInfo( filePath )
 		fileName = os.path.join(olddir, fileInfo_d["fileName"])
@@ -130,32 +129,16 @@ def tokenizecorpus(corp):
 		f = open( filePath, 'r', encoding="utf8")
 		reader = ""
 		reader = f.read()
-		reader = reader.replace("’", "'")
 		reader = reader.lower()
 		reader = word_tokenize(reader)
 		reader = ' '.join(str(r) for r in reader)
-		reader = reader.replace(" 's ", "scontraction ")
-		reader = reader.replace(" 'm ", "mcontraction ")
-		reader = reader.replace(" 're ", "recontraction ")
-		reader = reader.replace(" n't ", "ntcontraction ")
-		reader = reader.replace(" 'll ", "llcontraction ")
-		reader = reader.replace(" 'd ", "dcontraction ")
-		reader = reader.replace(" 've ", "vecontraction ")
-		reader = reader.replace(" s ", "scontraction ")
-		reader = reader.replace(" m ", "mcontraction ")
-		reader = reader.replace(" re ", "recontraction ")
-		reader = reader.replace(" nt ", "ntcontraction ")
-		reader = reader.replace(" ll ", "llcontraction ")
-		reader = reader.replace(" d ", "dcontraction ")
-		reader = reader.replace(" ve ", "vecontraction ")
-		reader = reader.replace("gim me", "gimmecontraction")
-		reader = reader.replace("gon na", "gonnacontraction")
-		reader = reader.replace("wan na", "wannacontraction")
-		reader = reader.replace("got ta", "gottacontraction")
-		reader = reader.replace("lem me", "lemmecontraction")
-		reader = reader.replace("wha dd ya", "whaddyacontraction")
-		reader = reader.replace("wha t cha", "whatchacontraction")
-
+		reader = reader.replace(" 's ", " s ")
+		reader = reader.replace(" 'm ", " m ")
+		reader = reader.replace(" 're ", " re ")
+		reader = reader.replace(" n't ", " nt ")
+		reader = reader.replace(" 'll ", " ll ")
+		reader = reader.replace(" 'd ", " d ")
+		reader = reader.replace(" 've ", " ve ")
 		reader = reader.replace("  ", " ")
 		f.close()
 		f = open( filePath, 'w', encoding="utf8")		
@@ -231,7 +214,6 @@ def lbiap_go():
 	global df_results_cleaned
 	global testvalue6
 	global testvalue7
-	tokenizecorpus(corpusfiles)
 	outfilename = os.path.join(olddir, "corpus.txt")
 	with open(outfilename, 'wb') as outfile:
 	    for filename in glob.glob(corpusfiles):
@@ -243,32 +225,18 @@ def lbiap_go():
 	
 	text = open( outfilename, encoding="utf8" ).read()
 	text = filterTextLines( text, [ "^fileName:", "^folderPath:" ] )
+	text = text.replace("'s ", " s ")
+	text = text.replace("'m ", " m ")
+	text = text.replace("'re ", " re ")
+	text = text.replace("n't ", " nt ")
+	text = text.replace("'ll ", " ll ")
+	text = text.replace("'d ", " d ")
+	text = text.replace("'ve ", " ve ")
 	text = text.replace("'", "")
 	text = text.replace("  ", " ")
-	text = text.replace(" 's ", "scontraction ")
-	text = text.replace(" 'm ", "mcontraction ")
-	text = text.replace(" 're ", "recontraction ")
-	text = text.replace(" n't ", "ntcontraction ")
-	text = text.replace(" 'll ", "llcontraction ")
-	text = text.replace(" 'd ", "dcontraction ")
-	text = text.replace(" 've ", "vecontraction ")
-	text = text.replace(" s ", "scontraction ")
-	text = text.replace(" m ", "mcontraction ")
-	text = text.replace(" re ", "recontraction ")
-	text = text.replace(" nt ", "ntcontraction ")
-	text = text.replace(" ll ", "llcontraction ")
-	text = text.replace(" d ", "dcontraction ")
-	text = text.replace(" ve ", "vecontraction ")
-	text = text.replace("gim me", "gimmecontraction")
-	text = text.replace("gon na", "gonnacontraction")
-	text = text.replace("wan na", "wannacontraction")
-	text = text.replace("got ta", "gottacontraction")
-	text = text.replace("lem me", "lemmecontraction")
-	text = text.replace("wha dd ya", "whaddyacontraction")
-	text = text.replace("wha t cha", "whatchacontraction")
 	text = text.lower()
 	tokens_ls_source = word_tokenize(text)
-	#print((tokens_ls_source))
+	
 	os.remove(os.path.join(olddir, "corpus.txt"))
 	
 	print(len(tokens_ls_source))
@@ -333,29 +301,15 @@ def lbiap_go():
 		folderPath = fileInfo_d["folderPath"]
 		text = open( filePath, encoding="utf8" ).read()
 		text = filterTextLines( text, [ "^fileName:", "^folderPath:" ] )
+		text = text.replace("'s ", " s ")
+		text = text.replace("'m ", " m ")
+		text = text.replace("'re ", " re ")
+		text = text.replace("n't ", " nt ")
+		text = text.replace("'ll ", " ll ")
+		text = text.replace("'d ", " d ")
+		text = text.replace("'ve ", " ve ")
 		text = text.replace("'", "")
 		text = text.replace("  ", " ")
-		text = text.replace(" 's ", "scontraction ")
-		text = text.replace(" 'm ", "mcontraction ")
-		text = text.replace(" 're ", "recontraction ")
-		text = text.replace(" n't ", "ntcontraction ")
-		text = text.replace(" 'll ", "llcontraction ")
-		text = text.replace(" 'd ", "dcontraction ")
-		text = text.replace(" 've ", "vecontraction ")
-		text = text.replace(" s ", "scontraction ")
-		text = text.replace(" m ", "mcontraction ")
-		text = text.replace(" re ", "recontraction ")
-		text = text.replace(" nt ", "ntcontraction ")
-		text = text.replace(" ll ", "llcontraction ")
-		text = text.replace(" d ", "dcontraction ")
-		text = text.replace(" ve ", "vecontraction ")
-		text = text.replace("gim me", "gimmecontraction")
-		text = text.replace("gon na", "gonnacontraction")
-		text = text.replace("wan na", "wannacontraction")
-		text = text.replace("got ta", "gottacontraction")
-		text = text.replace("lem me", "lemmecontraction")
-		text = text.replace("wha dd ya", "whaddyacontraction")
-		text = text.replace("wha t cha", "whatchacontraction")
 		text = text.lower()
 		tokens_ls = word_tokenize(text)
 		tokens_ls = nltk.Text(tokens_ls)
@@ -569,7 +523,7 @@ def lbiap_go():
 	new_4grams_list.sort()
 	new_3grams_list.sort()
 	
-	tokenizecorpus(newcorpusfiles)
+	tokenizecorpus()
 	interlock_ctrl(new_9grams_list, (freq_crit_list[0] - 1), "9gram", df_results_cleaned)
 	interlock_ctrl(new_8grams_list, (freq_crit_list[1] - 1), "8gram", df_results_cleaned)
 	interlock_ctrl(new_7grams_list, (freq_crit_list[2] - 1), "7gram", df_results_cleaned)
@@ -690,80 +644,6 @@ def lbiap_go():
 		MyFile.write(i+"\n")
 	
 	MyFile.close()
-	replace_dict = {
-    'dontcontraction': "don't",
-    'doesntcontraction': "doesn't",
-    'gonnacontraction': "gonna",
-    'gottacontraction': "gotta",
-    'aintcontraction': "ain't",
-    'arentcontraction': "aren't",
-    'hasntcontraction': "hasn't",
-    'haventcontraction': "haven't",
-    'hedcontraction': "he'd",
-    'hellcontraction': "he'll",
-    'hescontraction': "he's",
-    'howdcontraction': "how'd",
-    'howrecontraction': "how're",
-    'howscontraction': "how's",
-    'idcontraction': "i'd",
-    'illcontraction': "i'll",
-    'imcontraction': "i'm",
-    'isntcontraction': "isn't",
-    'itdcontraction': "it'd",
-    'itllcontraction': "it'll",
-    'itscontraction': "it's",
-    'ivecontraction': "i've",
-    'mightvecontraction': "might've",
-    'nobodyllcontraction': "nobody'll",
-    'nobodyscontraction': "nobody's",
-    'nothingscontraction': "nothing's",
-    'nowscontraction': "now's",
-    'shantcontraction': "shan't",
-    'shedcontraction': "she'd",
-    'shellcontraction': "she'll",
-    'shescontraction': "she's",
-    'shouldntcontraction': "shouldn't",
-    'shouldvecontraction': "should've",
-    'thatdcontraction': "that'd",
-    'thatllcontraction': "that'll",
-    'thatscontraction': "that's",
-    'therellcontraction': "there'll",
-    'therescontraction': "there's",
-    'thesellcontraction': "these'll",
-    'theydcontraction': "they'd",
-    'theyllcontraction': "they'll",
-    'theyrecontraction': "they're",
-    'theyvecontraction': "they've",
-    'thingsdcontraction': "things'd",
-    'thisdcontraction': "this'd",
-    'thisllcontraction': "this'll",
-    'wasntcontraction': "wasn't",
-    'wedcontraction': "we'd",
-    'wellcontraction': "we'll",
-    'werecontraction': "we're",
-    'werentcontraction': "weren't",
-    'wevecontraction': "we've",
-    'whatdcontraction': "what'd",
-    'whateverscontraction': "whatever's",
-    'whatllcontraction': "what'll",
-    'whatscontraction': "what's",
-    'whenscontraction': "when's",
-    'wheredcontraction': "where'd",
-    'wherescontraction': "where's",
-    'whodcontraction': "who'd",
-    'whollcontraction': "who'll",
-    'whoscontraction': "who's",
-    'whovecontraction': "who've",
-    'whydcontraction': "why'd",
-    'whyscontraction': "why's",
-    'wontcontraction': "won't",
-    'wouldntcontraction': "wouldn't",
-    'wouldvecontraction': "would've",
-    'youdcontraction': "you'd",
-    'youllcontraction': "you'll",
-    'yourecontraction': "you're",
-    'youvecontraction': "you've"
-    }
 	results_final_filename = filename_input + "_results_final.csv"
 	testvalue6 = (df_results_range_check > 0).astype(int).sum(axis=0)
 	testvalue7 = (df_results_range_check).astype(int).sum(axis=0)
@@ -775,28 +655,14 @@ def lbiap_go():
 	freqvals['range'] = freqrangereport['range']
 	freqvals['words'] = freqvals['index'].str.count(' ') + 1
 	freqvals_filename = (filename_input + "_freqvals.csv")
-
-	freqvals['index'] = freqvals['index'].replace(replace_dict, regex=True)
-
 	freqvals = freqvals.set_index('index')
 	freqvals = freqvals.rename(columns={'index':'bundle'})
 #	freqvals = freqvals.drop(columns=['level_0', 'Index'])
-
-
-# Replace the strings
-	print(freqvals.columns.tolist())
 	freqvals.to_csv(freqvals_filename, index='bundle')
 	
-	#df_results_range_check.to_csv(results_final_filename, index='File')
-	df_results_range_check = df_results_range_check.T
-
-	df_results_range_check = df_results_range_check.reset_index()
-	print(df_results_range_check.columns.tolist())
-
-	df_results_range_check['index'] = df_results_range_check['index'].replace(replace_dict, regex=True)
-
-	df_results_range_check.to_csv(results_final_filename + "T.csv", index='File')
-	df_results_range_check = df_results_range_check.T
+	df_results_range_check.to_csv(results_final_filename, index='File')
+	df_results_range_check.T.to_csv(results_final_filename + "T.csv", index='File')
+	
 	endtime = (time.time() - starttime)
 	
 	
