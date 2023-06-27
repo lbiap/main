@@ -759,7 +759,7 @@ def lbiap_go():
 
 
 window = tk.Tk()
-window.title("LBiaP 0.26")
+window.title("LBiaP 0.27")
 window.rowconfigure(0, weight=1)
 window.columnconfigure(1, weight=1)
 
