@@ -30,8 +30,11 @@ Cortes, V. & Lake, W. (2023). LBiaP: A solution to the problem of attaining obse
 # Special Thanks
 
 Joe Collentine [for a great workshop](https://www.youtube.com/watch?v=kSOaWoKzdbw) and [portions of the code for iterating through corpora and generating data from them](https://github.com/jcollentine/LAEL-python-workshop). (We recommend checking out the previous links if you'd like a singularly well-done introduction to using Python and collecting data from text files.)  
+
 Ye Lin Park for fantastic help on the bundle database.  
+
 Ashleigh Cox & Ahmed Abdelrazek for testing the program on Windows  
+
 [Burak Senel](https://twitter.com/buraksenel) for making LBiaP Pandas 2.x compatible.   
 
 # Further Reading
