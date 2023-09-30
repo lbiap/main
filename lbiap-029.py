@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-					Created on Sun Aug 30 22:23:48 2020@author: michael
-"""
+
 import errno
 import glob
 import pandas as pd
