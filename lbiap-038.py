@@ -82,13 +82,13 @@ print("initial bundle screening")
 
 def get_freq_list():
     global freq_crit_list
-    freq_crit_list[0] = int(E1.get())
-    freq_crit_list[1] = int(E2.get())
-    freq_crit_list[2] = int(E3.get())
-    freq_crit_list[3] = int(E4.get())
-    freq_crit_list[4] = int(E5.get())
-    freq_crit_list[5] = int(E6.get())
-    freq_crit_list[6] = int(E7.get())
+    freq_crit_list[3] = int(E1.get())
+    freq_crit_list[4] = int(E2.get())
+    freq_crit_list[5] = int(E3.get())
+    freq_crit_list[6] = int(E4.get())
+    freq_crit_list[7] = int(E5.get())
+    freq_crit_list[8] = int(E6.get())
+    freq_crit_list[9] = int(E7.get())
     print(freq_crit_list)
     return freq_crit_list
 
@@ -303,7 +303,7 @@ def process_ngram_list_text(text, replacement_dict):
 
 def tokenize_and_update(fileName, text, regex_patterns, ngram_csvs, frame):
     tokens = nltk.Text(word_tokenize(text))
-    for bundlelens in range(9, 2, -1):
+    for bundlelens in range(12, 2, -1):
         pattern = regex_patterns[bundlelens]
         list_grams = ngram_csvs[bundlelens]
         for gram in ngrams(tokens, bundlelens):
@@ -357,7 +357,7 @@ def lbiap_go():
     
     print(len(tokens_ls_source))
     
-    bundlelens = 9
+    bundlelens = 12
     threshold = 5
     while bundlelens > 2:
         ninefinder = AbstractCollocationFinder._ngram_freqdist(tokens_ls_source, bundlelens)
@@ -365,16 +365,16 @@ def lbiap_go():
         new.columns = ['Frequency']
         new.index.name = 'Term'
         if (bundlelens > 5):
-            new = (new.where(new['Frequency'] >= freq_crit_list[3])
+            new = (new.where(new['Frequency'] >= freq_crit_list[6])
                        .dropna())
         elif (bundlelens == 5):
-            new = (new.where(new['Frequency'] >= freq_crit_list[4])
+            new = (new.where(new['Frequency'] >= freq_crit_list[7])
                       .dropna())
         elif (bundlelens == 4):
-            new = (new.where(new['Frequency'] >= freq_crit_list[5])
+            new = (new.where(new['Frequency'] >= freq_crit_list[8])
                       .dropna())
         elif (bundlelens == 3):
-            new = (new.where(new['Frequency'] >= freq_crit_list[6])
+            new = (new.where(new['Frequency'] >= freq_crit_list[9])
                       .dropna())
         del new['Frequency']
         lensgrams = str(bundlelens) + "grams.csv"
@@ -401,9 +401,9 @@ def lbiap_go():
     frame = frame.set_index('Files')
     frame = frame.fillna(0)
     
-    bundlelens = 9
-    ngram_csvs = {i: read_ngram_csv(os.path.join('csv', f'{i}grams.csv')) for i in range(3, 10)}
-    regex_patterns = {i: re.compile("\('" + "',\ '".join(["[A-Za-z0-9À-ÖØ-öø-ÿ]+" for _ in range(i)]) + "'\)") for i in range(3, 10)}
+    bundlelens = 12
+    ngram_csvs = {i: read_ngram_csv(os.path.join('csv', f'{i}grams.csv')) for i in range(3, 13)}
+    regex_patterns = {i: re.compile("\('" + "',\ '".join(["[A-Za-z0-9À-ÖØ-öø-ÿ]+" for _ in range(i)]) + "'\)") for i in range(3, 13)}
 
     for filePath in glob.glob(newcorpusfiles):
         fileInfo_d = getFileInfo(filePath)
@@ -473,7 +473,7 @@ def lbiap_go():
     
     #purge results that don't meet frequency criteria
     #9gram check
-    print("9gram check")
+    print("12gram check")
     
     # Assuming freq_crit_list and df_final_results_exp are defined
     # Initialize dictionary for different n-grams
@@ -481,14 +481,14 @@ def lbiap_go():
     columns_to_delete = []
     
     # Loop to filter and convert to lists
-    for n in range(9, 2, -1):
+    for n in range(12, 2, -1):
         n_grams_dict[n] = bundles_by_words.loc[bundles_by_words['length'] == n, 'bundle'].tolist()
     
     # Loop for frequency check
-    for n in range(9, 2, -1):
+    for n in range(12, 2, -1):
         print(f"{n}gram check")
         for item in n_grams_dict[n]:
-            if df_final_results_exp[item].sum() < freq_crit_list[9-n]:
+            if df_final_results_exp[item].sum() < freq_crit_list[12-n]:
                 columns_to_delete.append(item)
                 print(item)
     
@@ -512,13 +512,13 @@ def lbiap_go():
     #add refresh code at each line
     
     # Loop to sort the n-gram lists in the dictionary
-    for n in range(9, 2, -1):
+    for n in range(12, 2, -1):
         n_grams_dict[n].sort()
     
     tokenizecorpus(newcorpusfiles, olddir)
     # Loop to call interlock_ctrl for each n-gram
-    for n in range(9, 2, -1):
-        interlock_ctrl(n_grams_dict[n], freq_crit_list[9-n] - 1, f"{n}gram", df_results_cleaned, olddir, newcorpusfiles)
+    for n in range(12, 2, -1):
+        interlock_ctrl(n_grams_dict[n], freq_crit_list[12-n] - 1, f"{n}gram", df_results_cleaned, olddir, newcorpusfiles)
 
     new_lb_list = list(df_results_cleaned.columns.values)
     new_lb_list.sort()
@@ -537,14 +537,14 @@ def lbiap_go():
     columns_to_delete = []
     
     # Filtering and sorting n-gram lists
-    for n in range(9, 2, -1):
+    for n in range(12, 2, -1):
         n_grams = bundles_by_words3.loc[bundles_by_words3['length'] == n, 'bundle']
         n_grams_list = sorted(n_grams.values.tolist())
         n_grams_dict[n] = n_grams_list
     
         # Frequency check and accumulate columns to delete
         for item in n_grams_list:
-            if df_results_cleaned[item].sum() < freq_crit_list[9 - n]:
+            if df_results_cleaned[item].sum() < freq_crit_list[12 - n]:
                 columns_to_delete.append(item)
                 print(item)
     
@@ -661,7 +661,7 @@ L8.grid(row=10, column=0, sticky="ew", padx=5, pady=5)
 L9 = tk.Label(text = "Filename")
 L9.grid(row=11, column=0, sticky="ew", padx=5, pady=5)
 
-freq_crit_list = [5, 5, 5, 5, 10, 20, 40]
+freq_crit_list = [5, 5, 5, 5, 5, 5, 5, 10, 20, 40]
 range_crit = 5
 
 E1 = tk.Entry(bd = 3)
@@ -684,13 +684,13 @@ E9 = tk.Entry(bd = 3)
 E9.grid(row=11, column=1, sticky="ew", padx=5, pady=5)
 
 E8.insert(0, range_crit)
-E1.insert(0, freq_crit_list[0])
-E2.insert(0, freq_crit_list[1])
-E3.insert(0, freq_crit_list[2])
-E4.insert(0, freq_crit_list[3])
-E5.insert(0, freq_crit_list[4])
-E6.insert(0, freq_crit_list[5])
-E7.insert(0, freq_crit_list[6])
+E1.insert(0, freq_crit_list[3])
+E2.insert(0, freq_crit_list[4])
+E3.insert(0, freq_crit_list[5])
+E4.insert(0, freq_crit_list[6])
+E5.insert(0, freq_crit_list[7])
+E6.insert(0, freq_crit_list[8])
+E7.insert(0, freq_crit_list[9])
 E9.insert(0, "filename")
 
 fr_buttons.grid(row=0, column=0, sticky="ns")
