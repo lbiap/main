@@ -68,9 +68,8 @@ linguistics + corpus-driven discourse)"
 You’ll see a small window titled **“LBiaP 0.38”** with two buttons and
 several entry fields.
 
-```
-mermaid
-graph TD
+``` mermaid
+flowchart TD
     subgraph "User's Original Corpus Folder"
         OLDDIR["📁 Selected Corpus Folder<br/>(olddir)"]
         TXTFILES["📄 *.txt files<br/>(your language texts)"]
