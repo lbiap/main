@@ -33,6 +33,9 @@ Ashleigh Cox & Ahmed Abdelrazek for testing the program on Windows
 
 [Burak Senel](https://twitter.com/buraksenel) for making LBiaP Pandas 2.x compatible.   
 
+Maya Sfeir and Rend Chammas for very helpful feedback on the manual. 
+
+
 # Further Reading
 [Cortes, V., & Lake, W. (2023). *LBiaP: A solution to the problem of attaining observation independence in lexical bundle studies. International Journal of Corpus Linguistics, 28*(2), 263-277.
 ](https://benjamins.com/catalog/ijcl.21100.cor)
