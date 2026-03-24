@@ -1,11 +1,3 @@
----
-title: "LBiaP manual"
-output:
-  pdf_document: default
-  html_document: default
-date: "2026-03-24"
----
-
 # LBiaP 0.38 — User Guide
 
 The **Lexical Bundles Identification and Analysis Program (LBiaP)** will
@@ -78,7 +70,7 @@ several entry fields.
 
 ```
 mermaid
-flowchart TD
+graph TD
     subgraph "User's Original Corpus Folder"
         OLDDIR["📁 Selected Corpus Folder<br/>(olddir)"]
         TXTFILES["📄 *.txt files<br/>(your language texts)"]
